@@ -19,7 +19,7 @@ const WeatherDisplayAllCards = ()=>{
     </div>
     )
     if(error){
-        console.log(error)
+        //console.log(error)
         return(
             <div>
                 <h2><u>Weather Cards</u></h2>
@@ -29,10 +29,17 @@ const WeatherDisplayAllCards = ()=>{
         )
     }
     //console.log(data.features.map((item,index)=>item.properties.id))
+    const dataSetIDs = data.features.map((item,index)=>[item.properties.id,item.properties.name,item.properties.state]);
+    let fiveRandoms = [ Math.floor(Math.random()*dataSetIDs.length),
+                        Math.floor(Math.random()*dataSetIDs.length),
+                        Math.floor(Math.random()*dataSetIDs.length),
+                        Math.floor(Math.random()*dataSetIDs.length),
+                        Math.floor(Math.random()*dataSetIDs.length)]
+    console.log(fiveRandoms);
     return(
         <div>
             <h2><u>Weather Cards</u></h2>
-            {data.features.map((item,index)=><WeatherCard key={index} parentData={item.properties.id} index={index} />)}
+            <WeatherCard index={fiveRandoms[0]} parentData={dataSetIDs[fiveRandoms[0]]} />
         </div>
     )
 }
