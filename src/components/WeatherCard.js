@@ -1,9 +1,14 @@
 import React from 'react';
 
 const WeatherCard = props =>{
-    return(
-        <div>Weather Card loading...</div>
-    )
+    if(props.parentData.length===0)
+        return(
+            <div>Weather Card loading...</div>
+        )
+    else
+        return(
+            <div key={props.key}>{props.parentData}</div>
+        )
 }
 
 export default WeatherCard;
