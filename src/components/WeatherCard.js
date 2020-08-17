@@ -7,7 +7,7 @@ const WeatherCard = props =>{
         )
     else
         return(
-            <div key={props.key}>{props.parentData}</div>
+            <div id={"Card"+props.index}>{props.parentData}</div>
         )
 }
 
