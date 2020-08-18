@@ -11,11 +11,11 @@ export default class WeatherCardCase extends Component{
             loading: true,
             errors: '',
             currentCards:[],
-            cardAmount: 10,
+            cardAmount: 5,
             statesAvailable: [],
-            selectedState: {value: ''},
+            selectedState: '',
             zonesAvailable: [],
-            selectZone: {value:''}
+            selectedZone: ''
         }
         this.handleChange = this.handleChange.bind(this);
         this.initCards = this.initCards.bind(this);
@@ -23,7 +23,17 @@ export default class WeatherCardCase extends Component{
     handleChange(e){
         switch (e.target.id){
             case 'statePicker':{
-                this.setState({selectedState: e.target.value})
+                const {data,selectedState} = this.state
+                const tempArr = data.filter(item=>item[2]===e.target.value);
+                this.setState({
+                    selectedState: e.target.value,
+                    zonesAvailable: tempArr,
+                    selectedZone: tempArr[0][1]
+                })               
+                break;
+            }
+            case 'zonePicker':{
+                this.setState({selectedZone: e.target.value})
                 break;
             }
             default: console.log(`Can't read event target id or invalid id`);
@@ -41,13 +51,19 @@ export default class WeatherCardCase extends Component{
                     //console.log(res)
                     const features = res.data.features
                     const dataSetIDs = features.map((item)=>[item.properties.id,item.properties.name,item.properties.state]);
-                    const tempArr = [...new Set(dataSetIDs.map(item=>item[2]))].map(item=>{return{value:item,label:item}}); //grabbing a disnct set of states
+                    const tempArr = [...new Set(dataSetIDs.map(item=>item[2]))].map(item=>{return{value:item,label:item}}); //grabbing a disnct set of states{value:'',label:''}
+                    const tempArr2 = dataSetIDs.filter(item=>item[2]===tempArr[0].value);
+                    //tempArr.unshift({value:'',label:'Select a State'});
+                    //tempArr2.unshift(['','Select a Zone','']);
                     this.setState({
                         data: dataSetIDs,
                         statesAvailable: tempArr,
                         selectedState: tempArr[0].value,
+                        zonesAvailable: tempArr2,
+                        selectedZone: tempArr[0][1],
                         loading: false
                     })
+                    //this.updateZones()
                     this.initCards(dataSetIDs.length)
                 })
         }catch(err){
@@ -70,7 +86,16 @@ export default class WeatherCardCase extends Component{
         this.setState({currentCards:tempArr})
     }
     render(){
-        const {data,loading,errors,currentCards,statesAvailable,selectedState} = this.state;
+        const {
+            data,
+            loading,
+            errors,
+            currentCards,
+            statesAvailable,
+            selectedState,
+            zonesAvailable,
+            selectedZone
+        } = this.state;
         if(loading){
             return(
                 <div>
@@ -95,6 +120,9 @@ export default class WeatherCardCase extends Component{
                     <h2><u>Weather Cards</u></h2>
                     <select value={selectedState} id="statePicker" onChange={this.handleChange}>
                         {statesAvailable.map((item,index)=><option value={item.value} key={index}>{item.label}</option>)}
+                    </select>
+                    <select value={selectedZone} id="zonePicker" onChange={this.handleChange}>
+                        {zonesAvailable.map((item,index)=><option value={item[1]} key={index}>{item[1]}</option>)}
                     </select>
                     {currentCards.map((item,index)=><WeatherCardb index={index} parentData={data[item]} key={index} />)}
                 </div>
