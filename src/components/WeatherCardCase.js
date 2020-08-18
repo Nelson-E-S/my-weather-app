@@ -10,7 +10,8 @@ export default class WeatherCardCase extends Component{
             loading: true,
             errors: '',
             currentCards:[],
-            cardAmount: 10
+            cardAmount: 10,
+            statesAvailable: []
         }
         this.handleChange = this.handleChange.bind(this);
         this.initCards = this.initCards.bind(this);
@@ -35,6 +36,7 @@ export default class WeatherCardCase extends Component{
                     const dataSetIDs = features.map((item)=>[item.properties.id,item.properties.name,item.properties.state]);
                     this.setState({
                         data: dataSetIDs,
+                        statesAvailable: [...new Set(dataSetIDs.map(item=>item[2]))], //grabbing a disnct set of states
                         loading: false
                     })
                     this.initCards(dataSetIDs.length)
@@ -51,7 +53,7 @@ export default class WeatherCardCase extends Component{
         let tempArr = [];
         console.log(arr===true)
         if(arr.length>0){
-            console.log("nothing")
+            tempArr = arr;
         }
         else{
             for(let i=0;i<cardAmount;i++)
