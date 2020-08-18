@@ -13,7 +13,9 @@ export default class WeatherCardCase extends Component{
             currentCards:[],
             cardAmount: 10,
             statesAvailable: [],
-            selectedState: {value: ''}
+            selectedState: {value: ''},
+            zonesAvailable: [],
+            selectZone: {value:''}
         }
         this.handleChange = this.handleChange.bind(this);
         this.initCards = this.initCards.bind(this);
@@ -58,7 +60,6 @@ export default class WeatherCardCase extends Component{
     initCards(len,arr=[]){
         const {cardAmount} = this.state;
         let tempArr = [];
-        console.log(arr===true)
         if(arr.length>0){
             tempArr = arr;
         }
