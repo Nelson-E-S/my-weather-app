@@ -29,7 +29,7 @@ const WeatherDisplayAllCards = ()=>{
     }
     const dataSetIDs = data.features.map((item,index)=>[item.properties.id,item.properties.name,item.properties.state]);
     let showCardsArr = [];
-    for(let i = 0; i<5; i++){
+    for(let i = 0; i<10; i++){
         showCardsArr.push(Math.floor(Math.random()*dataSetIDs.length))
     }
     return(

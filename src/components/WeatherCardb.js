@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+//requires parentData[zoneId,name,state]
+//requires index
 export default class WeatherCardb extends Component{
     constructor(props){
         super(props);
@@ -43,7 +45,7 @@ export default class WeatherCardb extends Component{
             axios
                 .get(query)
                 .then(res=>{
-                    console.log(res)
+                    //console.log(res)
                     const periods = res.data.properties.periods
                     this.setState({
                         data: periods,
@@ -70,14 +72,13 @@ export default class WeatherCardb extends Component{
         if(errors){
             return(
                 <div>
-                    <h2><u>Weather Cards</u></h2>
-                    <p>Error loading cards...</p>
+                    <p>Error loading card...</p>
                     <p>{errors.message}</p>
                 </div>
             )
         }
         if(data.length>0){
-            console.log(data)
+            //console.log(data)
             return(
                 <div id={'Card'+index}>
                     <h2>{parentData[1] + ', ' + parentData[2]}</h2>
