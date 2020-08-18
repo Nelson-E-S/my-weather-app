@@ -1,7 +1,7 @@
 import React from 'react';
-import WeatherCard from './WeatherCard';
 import axios from 'axios';
 import { useAsync } from 'react-async';
+import WeatherCardb from './WeatherCardb';
 
 const loadWeatherZones = async () =>{
     const res = await axios
@@ -19,7 +19,6 @@ const WeatherDisplayAllCards = ()=>{
     </div>
     )
     if(error){
-        //console.log(error)
         return(
             <div>
                 <h2><u>Weather Cards</u></h2>
@@ -28,18 +27,16 @@ const WeatherDisplayAllCards = ()=>{
             </div>
         )
     }
-    //console.log(data.features.map((item,index)=>item.properties.id))
     const dataSetIDs = data.features.map((item,index)=>[item.properties.id,item.properties.name,item.properties.state]);
     let fiveRandoms = [ Math.floor(Math.random()*dataSetIDs.length),
                         Math.floor(Math.random()*dataSetIDs.length),
                         Math.floor(Math.random()*dataSetIDs.length),
                         Math.floor(Math.random()*dataSetIDs.length),
                         Math.floor(Math.random()*dataSetIDs.length)]
-    console.log(fiveRandoms);
     return(
         <div>
             <h2><u>Weather Cards</u></h2>
-            <WeatherCard index={fiveRandoms[0]} parentData={dataSetIDs[fiveRandoms[0]]} />
+            <WeatherCardb index={0} parentData={dataSetIDs[fiveRandoms[0]]} />
         </div>
     )
 }
