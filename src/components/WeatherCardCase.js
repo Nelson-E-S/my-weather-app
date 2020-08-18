@@ -12,10 +12,10 @@ export default class WeatherCardCase extends Component{
             currentCards:[],
             cardAmount: 10
         }
-        this.handleClick = this.handleClick.bind(this);
+        this.handleChange = this.handleChange.bind(this);
         this.initCards = this.initCards.bind(this);
     }
-    handleClick(e){
+    handleChange(e){
         const {currentCards,data} = this.state;
         switch (e.target.id){
             default: console.log(`Can't read event target id or invalid id`);
@@ -46,11 +46,17 @@ export default class WeatherCardCase extends Component{
             })
         }
     }
-    initCards(len){
+    initCards(len,arr=[]){
         const {cardAmount} = this.state;
         let tempArr = [];
-        for(let i=0;i<cardAmount;i++)
-            tempArr.push(Math.floor(Math.random()*len))
+        console.log(arr===true)
+        if(arr.length>0){
+            console.log("nothing")
+        }
+        else{
+            for(let i=0;i<cardAmount;i++)
+                tempArr.push(Math.floor(Math.random()*len))
+        }
         this.setState({currentCards:tempArr})
     }
     render(){
