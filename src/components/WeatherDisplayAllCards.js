@@ -1,3 +1,6 @@
+//*****************************************************
+//*DONT USE, DOESN'T WORK, USE WeatherCardCase instead*
+//*****************************************************
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useAsync } from 'react-async';
