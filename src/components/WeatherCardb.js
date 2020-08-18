@@ -10,7 +10,9 @@ export default class WeatherCardb extends Component{
             data:[],
             loading: true,
             errors: '',
-            currentIndex:0
+            currentIndex:0,
+            name: '',
+            state: ''
         }
         this.handleClick = this.handleClick.bind(this);
     }
@@ -36,7 +38,6 @@ export default class WeatherCardb extends Component{
     }
     componentDidMount(){
         const {parentData} = this.props;
-        //console.log(parentData[0])
         const query = `https://api.weather.gov/zones/public/${parentData[0]}/forecast` 
         this.setState({
             loading: true
@@ -45,11 +46,12 @@ export default class WeatherCardb extends Component{
             axios
                 .get(query)
                 .then(res=>{
-                    //console.log(res)
                     const periods = res.data.properties.periods
                     this.setState({
                         data: periods,
-                        loading: false
+                        loading: false,
+                        name: parentData[1],
+                        state: parentData[2]
                     })
                 })
         }catch(err){
@@ -60,8 +62,8 @@ export default class WeatherCardb extends Component{
         }
     }
     render(){
-        const {data,loading,errors,currentIndex} = this.state;
-        const {index,parentData} = this.props;
+        const {data,loading,errors,currentIndex,name,state} = this.state;
+        const {index} = this.props;
         if(loading){
             return(
             <div>
@@ -78,10 +80,9 @@ export default class WeatherCardb extends Component{
             )
         }
         if(data.length>0){
-            //console.log(data)
             return(
                 <div id={'Card'+index}>
-                    <h2>{parentData[1] + ', ' + parentData[2]}</h2>
+                    <h2>{name + ', ' + state}</h2>
                     <h4>{data[currentIndex].name}</h4>
                     <p>{data[currentIndex].detailedForecast}</p>
                     <button id="prev" onClick={this.handleClick}>Previous</button>

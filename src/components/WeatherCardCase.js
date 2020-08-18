@@ -15,26 +15,49 @@ export default class WeatherCardCase extends Component{
             statesAvailable: [],
             selectedState: '',
             zonesAvailable: [],
-            selectedZone: ''
+            selectedZone: '',
+            selectedZoneData: '',
+            showCustomCard: false
         }
         this.handleChange = this.handleChange.bind(this);
         this.initCards = this.initCards.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
     handleChange(e){
         switch (e.target.id){
             case 'statePicker':{
-                const {data,selectedState} = this.state
+                const {data} = this.state
                 const tempArr = data.filter(item=>item[2]===e.target.value);
                 this.setState({
                     selectedState: e.target.value,
                     zonesAvailable: tempArr,
-                    selectedZone: tempArr[0][1]
+                    selectedZone: tempArr[0][1],
+                    selectedZoneData: tempArr[0]
                 })               
                 break;
             }
             case 'zonePicker':{
-                this.setState({selectedZone: e.target.value})
+                const {zonesAvailable} = this.state
+                let zoneData = []
+                zonesAvailable.forEach(el=>el[1]===e.target.value?zoneData=el:[])
+                this.setState({
+                    selectedZone: e.target.value,
+                    selectedZoneData: zoneData
+                })
                 break;
+            }
+            default: console.log(`Can't read event target id or invalid id`);
+        }
+    }
+    handleClick(e){
+        switch (e.target.id){
+            case 'show':{
+                this.setState({showCustomCard:true})
+                break;
+            }
+            case 'hide':{
+                this.setState({showCustomCard:false})
+                break
             }
             default: console.log(`Can't read event target id or invalid id`);
         }
@@ -48,7 +71,6 @@ export default class WeatherCardCase extends Component{
             axios
                 .get(query)
                 .then(res=>{
-                    //console.log(res)
                     const features = res.data.features
                     const dataSetIDs = features.map((item)=>[item.properties.id,item.properties.name,item.properties.state]);
                     const tempArr = [...new Set(dataSetIDs.map(item=>item[2]))].map(item=>{return{value:item,label:item}}); //grabbing a disnct set of states{value:'',label:''}
@@ -60,10 +82,10 @@ export default class WeatherCardCase extends Component{
                         statesAvailable: tempArr,
                         selectedState: tempArr[0].value,
                         zonesAvailable: tempArr2,
-                        selectedZone: tempArr[0][1],
+                        selectedZone: tempArr2[0][1],
+                        selectedZoneData: tempArr2[0],
                         loading: false
                     })
-                    //this.updateZones()
                     this.initCards(dataSetIDs.length)
                 })
         }catch(err){
@@ -94,7 +116,9 @@ export default class WeatherCardCase extends Component{
             statesAvailable,
             selectedState,
             zonesAvailable,
-            selectedZone
+            selectedZone,
+            showCustomCard,
+            selectedZoneData
         } = this.state;
         if(loading){
             return(
@@ -114,7 +138,6 @@ export default class WeatherCardCase extends Component{
             )
         }
         if(data.length>0){
-            //console.log(data)
             return(
                 <div>
                     <h2><u>Weather Cards</u></h2>
@@ -124,6 +147,9 @@ export default class WeatherCardCase extends Component{
                     <select value={selectedZone} id="zonePicker" onChange={this.handleChange}>
                         {zonesAvailable.map((item,index)=><option value={item[1]} key={index}>{item[1]}</option>)}
                     </select>
+                    <button id="show" onClick={this.handleClick}>Show Card</button>
+                    <button id="hide" onClick={this.handleClick}>Hide Card</button>
+                    {showCustomCard?<WeatherCardb index={'Custom'} parentData={selectedZoneData}/>:null}
                     {currentCards.map((item,index)=><WeatherCardb index={index} parentData={data[item]} key={index} />)}
                 </div>
             )
