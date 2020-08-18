@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import WeatherCardb from './WeatherCardb';
 
+
 export default class WeatherCardCase extends Component{
     constructor(props){
         super(props);
@@ -11,14 +12,18 @@ export default class WeatherCardCase extends Component{
             errors: '',
             currentCards:[],
             cardAmount: 10,
-            statesAvailable: []
+            statesAvailable: [],
+            selectedState: {value: ''}
         }
         this.handleChange = this.handleChange.bind(this);
         this.initCards = this.initCards.bind(this);
     }
     handleChange(e){
-        const {currentCards,data} = this.state;
         switch (e.target.id){
+            case 'statePicker':{
+                this.setState({selectedState: e.target.value})
+                break;
+            }
             default: console.log(`Can't read event target id or invalid id`);
         }
     }
@@ -34,9 +39,11 @@ export default class WeatherCardCase extends Component{
                     //console.log(res)
                     const features = res.data.features
                     const dataSetIDs = features.map((item)=>[item.properties.id,item.properties.name,item.properties.state]);
+                    const tempArr = [...new Set(dataSetIDs.map(item=>item[2]))].map(item=>{return{value:item,label:item}}); //grabbing a disnct set of states
                     this.setState({
                         data: dataSetIDs,
-                        statesAvailable: [...new Set(dataSetIDs.map(item=>item[2]))], //grabbing a disnct set of states
+                        statesAvailable: tempArr,
+                        selectedState: tempArr[0].value,
                         loading: false
                     })
                     this.initCards(dataSetIDs.length)
@@ -62,7 +69,7 @@ export default class WeatherCardCase extends Component{
         this.setState({currentCards:tempArr})
     }
     render(){
-        const {data,loading,errors,currentCards} = this.state;
+        const {data,loading,errors,currentCards,statesAvailable,selectedState} = this.state;
         if(loading){
             return(
                 <div>
@@ -85,6 +92,9 @@ export default class WeatherCardCase extends Component{
             return(
                 <div>
                     <h2><u>Weather Cards</u></h2>
+                    <select value={selectedState} id="statePicker" onChange={this.handleChange}>
+                        {statesAvailable.map((item,index)=><option value={item.value} key={index}>{item.label}</option>)}
+                    </select>
                     {currentCards.map((item,index)=><WeatherCardb index={index} parentData={data[item]} key={index} />)}
                 </div>
             )
