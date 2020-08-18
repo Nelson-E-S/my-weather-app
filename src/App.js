@@ -2,7 +2,7 @@ import React from 'react';
 import './styles/App.css';
 
 //testing
-import AllCards from  './components/WeatherDisplayAllCards'
+import AllCards from  './components/WeatherCardCase'
 
 function App() {
   return (

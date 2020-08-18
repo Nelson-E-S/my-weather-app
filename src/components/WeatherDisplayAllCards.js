@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { useAsync } from 'react-async';
 import WeatherCardb from './WeatherCardb';
@@ -10,8 +10,20 @@ const loadWeatherZones = async () =>{
     return res.data;
 }
 
+const getShowCardsArr = (num,len) =>{
+    let tempArr = []
+    for(let i = 0; i<num; i++){
+        tempArr.push(Math.floor(Math.random()*len))
+    }
+    return tempArr
+}
+
 const WeatherDisplayAllCards = ()=>{
+    const [showCards,setShowCards] = useState({
+        showCardsArr: []
+    })
     const {data,error, isLoading} = useAsync({promiseFn: loadWeatherZones});
+    console.log(`isLoading:${isLoading}`)
     if(isLoading) return(
         <div>
         <h2><u>Weather Cards</u></h2>
@@ -27,17 +39,20 @@ const WeatherDisplayAllCards = ()=>{
             </div>
         )
     }
-    const dataSetIDs = data.features.map((item,index)=>[item.properties.id,item.properties.name,item.properties.state]);
-    let showCardsArr = [];
-    for(let i = 0; i<10; i++){
-        showCardsArr.push(Math.floor(Math.random()*dataSetIDs.length))
+    if(data && !isLoading){
+        const dataSetIDs = data.features.map((item,index)=>[item.properties.id,item.properties.name,item.properties.state]);
+        let tempArr = getShowCardsArr(10,dataSetIDs.length)
+        console.log(tempArr)
+        /*setShowCards({
+            showCardsArr: tempArr
+        })*/
+        return(
+            <div>
+                <h2><u>Weather Cards</u></h2>
+                {/*showCards.showCardsArr.map((item,index)=><WeatherCardb index={index} parentData={dataSetIDs[item]} key={index} />)*/}
+            </div>
+        )
     }
-    return(
-        <div>
-            <h2><u>Weather Cards</u></h2>
-            {showCardsArr.map((item,index)=><WeatherCardb index={index} parentData={dataSetIDs[item]} key={index} />)}
-        </div>
-    )
 }
 
 export default WeatherDisplayAllCards

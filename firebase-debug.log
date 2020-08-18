@@ -1,0 +1,21 @@
+[debug] [2020-08-18T16:02:49.040Z] ----------------------------------------------------------------------
+[debug] [2020-08-18T16:02:49.042Z] Command:       E:\Program Files\nodejs\node.exe E:\Program Files\nodejs\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2020-08-18T16:02:49.042Z] CLI Version:   8.7.0
+[debug] [2020-08-18T16:02:49.042Z] Platform:      win32
+[debug] [2020-08-18T16:02:49.042Z] Node Version:  v12.18.3
+[debug] [2020-08-18T16:02:49.043Z] Time:          Tue Aug 18 2020 12:02:49 GMT-0400 (Eastern Daylight Time)
+[debug] [2020-08-18T16:02:49.043Z] ----------------------------------------------------------------------
+[debug] [2020-08-18T16:02:49.043Z] 
+[debug] [2020-08-18T16:02:49.063Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-08-18T16:02:49.063Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  E:\My Documents\_school\PerScholas\SoftwareEngineering\VSCODE\repo\my-weather-app
+
