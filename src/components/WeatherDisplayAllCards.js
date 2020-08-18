@@ -28,15 +28,14 @@ const WeatherDisplayAllCards = ()=>{
         )
     }
     const dataSetIDs = data.features.map((item,index)=>[item.properties.id,item.properties.name,item.properties.state]);
-    let fiveRandoms = [ Math.floor(Math.random()*dataSetIDs.length),
-                        Math.floor(Math.random()*dataSetIDs.length),
-                        Math.floor(Math.random()*dataSetIDs.length),
-                        Math.floor(Math.random()*dataSetIDs.length),
-                        Math.floor(Math.random()*dataSetIDs.length)]
+    let showCardsArr = [];
+    for(let i = 0; i<5; i++){
+        showCardsArr.push(Math.floor(Math.random()*dataSetIDs.length))
+    }
     return(
         <div>
             <h2><u>Weather Cards</u></h2>
-            <WeatherCardb index={0} parentData={dataSetIDs[fiveRandoms[0]]} />
+            {showCardsArr.map((item,index)=><WeatherCardb index={index} parentData={dataSetIDs[item]} key={index} />)}
         </div>
     )
 }

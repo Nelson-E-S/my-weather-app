@@ -6,8 +6,30 @@ export default class WeatherCardb extends Component{
         super(props);
         this.state={
             data:[],
-            loading: false,
-            errors: ''
+            loading: true,
+            errors: '',
+            currentIndex:0
+        }
+        this.handleClick = this.handleClick.bind(this);
+    }
+    handleClick(e){
+        const {currentIndex,data} = this.state;
+        switch (e.target.id){
+            case 'prev':{
+                if(currentIndex===0)
+                    this.setState({currentIndex:data.length - 1})
+                else
+                    this.setState({currentIndex:currentIndex-1})
+                break;
+            }
+            case 'next':{
+                if(currentIndex===data.length-1)
+                    this.setState({currentIndex:0})
+                else
+                    this.setState({currentIndex:currentIndex+1})
+                break;
+            }
+            default: console.log(`Can't read event target id or invalid id`);
         }
     }
     componentDidMount(){
@@ -36,7 +58,7 @@ export default class WeatherCardb extends Component{
         }
     }
     render(){
-        const {data,loading,errors} = this.state;
+        const {data,loading,errors,currentIndex} = this.state;
         const {index,parentData} = this.props;
         if(loading){
             return(
@@ -54,10 +76,15 @@ export default class WeatherCardb extends Component{
                 </div>
             )
         }
-        if(data){
+        if(data.length>0){
+            console.log(data)
             return(
                 <div id={'Card'+index}>
                     <h2>{parentData[1] + ', ' + parentData[2]}</h2>
+                    <h4>{data[currentIndex].name}</h4>
+                    <p>{data[currentIndex].detailedForecast}</p>
+                    <button id="prev" onClick={this.handleClick}>Previous</button>
+                    <button id="next" onClick={this.handleClick}>Next</button>
                 </div>
             )
         }
