@@ -1,8 +1,12 @@
 import React from 'react'
+import {Header, Icon} from 'semantic-ui-react' 
 
 const HomePage = () =>{
     return(
-        <h1>Welcome to my Weather App</h1>
+        <Header as='h1' icon textAlign='center' color="yellow">
+            <Icon name='sun outline' color="yellow" circular />
+            <Header.Content>Welcome to my Weather App</Header.Content>
+        </Header>
     )
 }
 
