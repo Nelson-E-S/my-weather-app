@@ -11,8 +11,9 @@ const SelectorPage = props =>{
     const {personalCardState} = props;
     return(
         <div>
-
+            <WeatherPersonalCards />
             <hr />
+            <WeatherCardCase />
         </div>
     )
 }
