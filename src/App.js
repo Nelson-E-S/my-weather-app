@@ -1,12 +1,50 @@
 import React from 'react';
 import './styles/App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import SelectorPage from './pages/SelectorPage'
+import UserPage from './pages/UserPage'
+import HomePage from './pages/HomePage'
 
-//testing
-import Test from  './pages/SelectorPage'
+
 function App() {
   return (
     <div className="App">
-      <Test />
+        <Router>
+      <div>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/UserPage">About</Link>
+            </li>
+            <li>
+              <Link to="/SelectorPage">Users</Link>
+            </li>
+          </ul>
+        </nav>
+
+        {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+        <Switch>
+          <Route path="/SelectorPage">
+            <SelectorPage />
+          </Route>
+          <Route path="/users">
+            <UserPage />
+          </Route>
+          <Route exact path="/">
+            <HomePage />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
     </div>
   );
 }
