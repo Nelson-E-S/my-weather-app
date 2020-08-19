@@ -8,7 +8,7 @@ const mapStateToProps = state =>({
 })
 
 const SelectorPage = props =>{
-    const {myCardsState} = props
+    //const {myCardsState} = props
     return(
         <div>
             <WeatherPersonalCards />

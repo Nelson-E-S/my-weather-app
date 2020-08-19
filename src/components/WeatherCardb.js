@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import {CARD_ADD,CARD_REMOVE} from '../actions/cardActions'
+import {Card,Icon,Button,Loader} from 'semantic-ui-react'
 
 const mapStateToProps = state =>({
     myCardsState: state.myCardsState
@@ -90,41 +91,51 @@ class WeatherCardb extends Component{
         if(loading){
             return(
             <div>
-                <p>Loading weather card...</p>
+                <Card>
+                    <Card.Content header="One moment please..." />
+                    <Card.Content meta="........." />
+                    <Card.Content description="........"/>
+                    <Loader active />
+                </Card>
             </div>
             )
         }
         if(errors){
             return(
-                <div>
-                    <p>Error loading card...</p>
-                    <p>{errors.message}</p>
-                </div>
+                <Card>
+                    <Card.Content header="No data" />
+                    <Card.Content meta="error" />
+                    <Card.Content description="refresh the page to try again"/>
+                </Card>
             )
         }
         if(data.length>0){
             if(personal){
                 return(
-                    <div id={'Card'+index}>
-                        <h2>{name + ', ' + state}</h2>
-                        <h4>{data[currentIndex].name}</h4>
-                        <p>{data[currentIndex].detailedForecast}</p>
-                        <button id="prev" onClick={this.handleClick}>Previous</button>
-                        <button id="next" onClick={this.handleClick}>Next</button><br />
-                        <button id="rem" onClick={this.handleClick}>Remove Card</button>
-                    </div>
+                    <Card id={'Card'+index} compact>
+                        <Card.Content header={name + ', ' + state} />
+                        <Card.Content meta={data[currentIndex].name} />
+                        <Card.Content description={data[currentIndex].detailedForecast} />
+                        <Card.Content extra>
+                            <Button id="prev" onClick={this.handleClick}>Previous</Button>
+                            <Button id="next" onClick={this.handleClick}>Next</Button><br />
+                            <Button id="rem" onClick={this.handleClick}>Remove Card</Button>
+                        </Card.Content>
+                    </Card>
                 )
             }
             else{
                 return(
-                    <div id={'Card'+index}>
-                        <h2>{name + ', ' + state}</h2>
-                        <h4>{data[currentIndex].name}</h4>
-                        <p>{data[currentIndex].detailedForecast}</p>
-                        <button id="prev" onClick={this.handleClick}>Previous</button>
-                        <button id="next" onClick={this.handleClick}>Next</button><br />
-                        <button id="add" onClick={this.handleClick}>Add Card</button>
-                    </div>
+                    <Card id={'Card'+index} compact>
+                        <Card.Content header={name + ', ' + state} />
+                        <Card.Content meta={data[currentIndex].name} />
+                        <Card.Content description={data[currentIndex].detailedForecast} />
+                        <Card.Content extra>
+                            <Button id="prev" onClick={this.handleClick}>Previous</Button>
+                            <Button id="next" onClick={this.handleClick}>Next</Button><br />
+                            <Button id="add" onClick={this.handleClick}>Add Card</Button>
+                        </Card.Content>
+                    </Card>
                 )
             }
         }
