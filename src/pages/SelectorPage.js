@@ -2,6 +2,7 @@ import React from 'react';
 import WeatherPersonalCards from '../components/WeatherPersonalCards';
 import WeatherCardCase from '../components/WeatherCardCase';
 import {connect} from 'react-redux';
+import {Segment,Divider} from 'semantic-ui-react'
 
 const mapStateToProps = state =>({
     myCardsState: state.myCardsState
@@ -10,11 +11,11 @@ const mapStateToProps = state =>({
 const SelectorPage = props =>{
     //const {myCardsState} = props
     return(
-        <div>
+        <Segment>
             <WeatherPersonalCards />
-            <hr style={{height:'1px',width:'100%',background:'black'}} />
+            <Divider />
             <WeatherCardCase />
-        </div>
+        </Segment>
     )
 }
 export default connect(mapStateToProps)(SelectorPage);
