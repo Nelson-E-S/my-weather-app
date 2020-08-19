@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import WeatherCardb from './WeatherCardb';
-
+import {Segment, Button,Grid} from 'semantic-ui-react';
 
 export default class WeatherCardCase extends Component{
     constructor(props){
@@ -139,19 +139,31 @@ export default class WeatherCardCase extends Component{
         }
         if(data.length>0){
             return(
-                <div>
-                    <h2><u>Weather Cards</u></h2>
-                    <select value={selectedState} id="statePicker" onChange={this.handleChange}>
-                        {statesAvailable.map((item,index)=><option value={item.value} key={index}>{item.label}</option>)}
-                    </select>
-                    <select value={selectedZone} id="zonePicker" onChange={this.handleChange}>
-                        {zonesAvailable.map((item,index)=><option value={item[1]} key={index}>{item[1]}</option>)}
-                    </select>
-                    <button id="show" onClick={this.handleClick}>Show Card</button>
-                    <button id="hide" onClick={this.handleClick}>Hide Card</button>
-                    {showCustomCard?<WeatherCardb index={'Custom'} parentData={selectedZoneData}/>:null}
-                    {currentCards.map((item,index)=><WeatherCardb index={index} parentData={data[item]} key={index} />)}
-                </div>
+                <Segment compact>
+                    <Segment.Group>
+                        <h2><u>Weather Cards</u></h2>
+                    </Segment.Group>
+                    <Segment.Group>
+                        <Segment.Group>
+                            <select value={selectedState} id="statePicker" onChange={this.handleChange}>
+                                {statesAvailable.map((item,index)=><option value={item.value} key={index}>{item.label}</option>)}
+                            </select>
+                            <select value={selectedZone} id="zonePicker" onChange={this.handleChange}>
+                                {zonesAvailable.map((item,index)=><option value={item[1]} key={index}>{item[1]}</option>)}
+                            </select>
+                            <Button id="show" onClick={this.handleClick}>Show Card</Button>
+                            <Button id="hide" onClick={this.handleClick}>Hide Card</Button>
+                        </Segment.Group>
+                        {showCustomCard?<WeatherCardb index={'Custom'} parentData={selectedZoneData}/>:null}
+                    </Segment.Group>
+                    <Segment.Group>
+                            <Grid centered>
+                                <Grid.Column stretched>
+                                    {currentCards.map((item,index)=><WeatherCardb index={index} parentData={data[item]} key={index} />)}
+                                </Grid.Column>
+                            </Grid>
+                    </Segment.Group>
+                </Segment>
             )
         }
     }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import {CARD_ADD,CARD_REMOVE} from '../actions/cardActions'
-import {Card,Icon,Button,Loader} from 'semantic-ui-react'
+import {Card,Button,Loader} from 'semantic-ui-react'
 
 const mapStateToProps = state =>({
     myCardsState: state.myCardsState
