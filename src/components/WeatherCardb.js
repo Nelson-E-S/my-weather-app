@@ -60,7 +60,7 @@ class WeatherCardb extends Component{
             default: console.log(`Can't read event target id or invalid id`);
         }
     }
-    componentWillMount(){
+    componentDidMount(){
         const {parentData} = this.props;
         const query = `https://api.weather.gov/zones/public/${parentData[0]}/forecast` 
         this.setState({

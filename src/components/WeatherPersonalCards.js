@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import WeatherCardb from './WeatherCardb';
 import { connect } from 'react-redux';
-import {Segment} from 'semantic-ui-react'
+import {Segment,Button} from 'semantic-ui-react'
+
 const mapStateToProps = state =>({
     myCardsState: state.myCardsState
 })
