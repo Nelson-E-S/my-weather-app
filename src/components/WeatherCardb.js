@@ -112,7 +112,7 @@ class WeatherCardb extends Component{
         if(data.length>0){
             if(personal){
                 return(
-                    <Card id={'Card'+index} compact>
+                    <Card id={'Card'+index}>
                         <Card.Content header={name + ', ' + state} />
                         <Card.Content meta={data[currentIndex].name} />
                         <Card.Content description={data[currentIndex].detailedForecast} />
@@ -126,13 +126,15 @@ class WeatherCardb extends Component{
             }
             else{
                 return(
-                    <Card id={'Card'+index} compact>
+                    <Card id={'Card'+index}>
                         <Card.Content header={name + ', ' + state} />
                         <Card.Content meta={data[currentIndex].name} />
                         <Card.Content description={data[currentIndex].detailedForecast} />
                         <Card.Content extra>
                             <Button id="prev" onClick={this.handleClick}>Previous</Button>
-                            <Button id="next" onClick={this.handleClick}>Next</Button><br />
+                            <Button id="next" onClick={this.handleClick}>Next</Button>
+                        </Card.Content>
+                        <Card.Content extra>
                             <Button id="add" onClick={this.handleClick}>Add Card</Button>
                         </Card.Content>
                     </Card>

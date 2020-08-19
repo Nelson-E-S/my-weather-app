@@ -139,20 +139,22 @@ export default class WeatherCardCase extends Component{
         }
         if(data.length>0){
             return(
-                <Segment compact>
+                <Segment>
                     <Segment.Group>
                         <h2><u>Weather Cards</u></h2>
                     </Segment.Group>
                     <Segment.Group>
-                        <Segment.Group>
-                            <select value={selectedState} id="statePicker" onChange={this.handleChange}>
-                                {statesAvailable.map((item,index)=><option value={item.value} key={index}>{item.label}</option>)}
+                        <Segment.Group compact>
+                            <select className="ui selection dropdown" value={selectedState} id="statePicker" onChange={this.handleChange}>
+                                {statesAvailable.map((item,index)=><option className="text" value={item.value} key={index}>{item.label}</option>)}
                             </select>
-                            <select value={selectedZone} id="zonePicker" onChange={this.handleChange}>
-                                {zonesAvailable.map((item,index)=><option value={item[1]} key={index}>{item[1]}</option>)}
+                            <select className="ui selection dropdown" value={selectedZone} id="zonePicker" onChange={this.handleChange}>
+                                {zonesAvailable.map((item,index)=><option className="item text" value={item[1]} key={index}>{item[1]}</option>)}
                             </select>
-                            <Button id="show" onClick={this.handleClick}>Show Card</Button>
-                            <Button id="hide" onClick={this.handleClick}>Hide Card</Button>
+                            <Segment.Group>
+                                <Button id="show" onClick={this.handleClick}>Show Card</Button>
+                                <Button id="hide" onClick={this.handleClick}>Hide Card</Button>
+                            </Segment.Group>
                         </Segment.Group>
                         {showCustomCard?<WeatherCardb index={'Custom'} parentData={selectedZoneData}/>:null}
                     </Segment.Group>

@@ -7,10 +7,12 @@ const mapStateToProps = state =>({
     myCardsState: state.myCardsState
 })
 
+
 const WeatherPersonalCards = props =>{
     const {myCardsState} = props;
+
     return(
-        <Segment compact>
+        <Segment>
             <p>{myCardsState.personalCards.length===0?'No personal cards loaded...':'Your cards:'}</p>
             {myCardsState.personalCards.map((item,index)=><WeatherCardb index={index} parentData={item} key={index} personal={true}/>)}
         </Segment>
