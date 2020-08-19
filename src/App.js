@@ -22,10 +22,10 @@ function App() {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/UserPage">About</Link>
+              <Link to="/UserPage">User Page</Link>
             </li>
             <li>
-              <Link to="/SelectorPage">Users</Link>
+              <Link to="/SelectorPage">Selector Page</Link>
             </li>
           </ul>
         </nav>
@@ -36,7 +36,7 @@ function App() {
           <Route path="/SelectorPage">
             <SelectorPage />
           </Route>
-          <Route path="/users">
+          <Route path="/UserPage">
             <UserPage />
           </Route>
           <Route exact path="/">

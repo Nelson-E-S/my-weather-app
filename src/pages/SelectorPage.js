@@ -9,7 +9,6 @@ const mapStateToProps = state =>({
 
 const SelectorPage = props =>{
     const {myCardsState} = props
-    console.log(myCardsState)
     return(
         <div>
             <WeatherPersonalCards />
