@@ -1,14 +1,15 @@
 import React from 'react';
-//import {connect} from 'react-redux';
 import WeatherPersonalCards from '../components/WeatherPersonalCards';
-import WeatherCardCase from '../components/WeatherCardCase';;
+import WeatherCardCase from '../components/WeatherCardCase';
+import {connect} from 'react-redux';
 
-/*const mapStateToProps = state =>({
-    myCardState: state.myCardState
-})*/
+const mapStateToProps = state =>({
+    myCardsState: state.myCardsState
+})
 
 const SelectorPage = props =>{
-    //const {myCardState} = props;
+    const {myCardsState} = props
+    console.log(myCardsState)
     return(
         <div>
             <WeatherPersonalCards />
@@ -17,4 +18,4 @@ const SelectorPage = props =>{
         </div>
     )
 }
-export default SelectorPage//connect(mapStateToProps)(SelectorPage)
+export default connect(mapStateToProps)(SelectorPage);

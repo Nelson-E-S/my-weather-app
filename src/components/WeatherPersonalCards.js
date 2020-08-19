@@ -10,9 +10,7 @@ const WeatherPersonalCards = props =>{
     const {myCardsState} = props;
     return(
         <div>
-        {myCardsState.personalCards.length>0?
-            myCardsState.personalCards.map((item,index)=><WeatherCardb index={index} parentData={item} key={index}/>)
-        :<p>No personal cards stored...</p>}
+        {myCardsState.personalCards.map((item,index)=><WeatherCardb index={index} parentData={item} key={index} personal={true}/>)}
         </div>
     )
 }
