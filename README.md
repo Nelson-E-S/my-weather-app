@@ -12,5 +12,6 @@ ReactJS
 Redux
 React Async
 SemanticUI React
+ReactPlayer
 Weather.gov API
 ```
