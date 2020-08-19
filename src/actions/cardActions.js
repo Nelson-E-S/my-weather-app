@@ -5,7 +5,7 @@ export const cardAdd = (data) =>({
     type: CARD_ADD,
     payload: data
 })
-export const cardReomve = (data) =({
+export const cardReomve = (data) =>({
     type: CARD_REMOVE,
     payload: data
 })
