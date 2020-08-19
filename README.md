@@ -11,4 +11,5 @@ The app will show a selection of forecast cards to user which the user can speci
 ReactJS
 Redux
 React Async
+SemanticUI React
 ```
