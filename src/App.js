@@ -9,39 +9,32 @@ import {
 import SelectorPage from './pages/SelectorPage'
 import UserPage from './pages/UserPage'
 import HomePage from './pages/HomePage'
+import { List } from 'semantic-ui-react'
 
 
 function App() {
   return (
     <div className="App">
         <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/UserPage">User Page</Link>
-            </li>
-          </ul>
-        </nav>
-
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
-        <Switch>
-          <Route path="/SelectorPage">
-            <SelectorPage />
-          </Route>
-          <Route path="/UserPage">
-            <UserPage />
-          </Route>
-          <Route exact path="/">
-            <HomePage />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+          <List link horizontal divided relaxed size="large">
+          <List.Item active><Link to="/">Home</Link></List.Item>
+          <List.Item><Link to="/UserPage">Your Cards</Link></List.Item>
+          </List>
+        
+            {/* A <Switch> looks through its children <Route>s and
+                renders the first one that matches the current URL. */}
+            <Switch>
+              <Route path="/SelectorPage">
+                <SelectorPage />
+              </Route>
+              <Route path="/UserPage">
+                <UserPage />
+              </Route>
+              <Route exact path="/">
+                <HomePage />
+              </Route>
+            </Switch>
+        </Router>
     </div>
   );
 }
