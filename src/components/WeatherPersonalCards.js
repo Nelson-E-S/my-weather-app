@@ -3,16 +3,18 @@ import WeatherCardb from './WeatherCardb';
 import { connect } from 'react-redux';
 
 const mapStateToProps = state =>({
-    personalCardState: state.personalCards
+    PCState: state.personalCards
 })
 
 const WeatherPersonalCards = props =>{
-    const {personalCardState} = props;
+    const {PCState} = props;
+    console.log(PCState)
     return(
         <div>
-        {personalCardState.personalCards.length>0?
-            personalCardState.personalCards.map((item,index)=><WeatherCardb index={index} parentData={item} key={index}/>)
-            :<p>No personal cards stored...</p>}
+            TESTTING
+        {/*personalCardsState.personalCards.length>0?
+            personalCardsState.personalCards.map((item,index)=><WeatherCardb index={index} parentData={item} key={index}/>)
+        :<p>No personal cards stored...</p>*/}
         </div>
     )
 }

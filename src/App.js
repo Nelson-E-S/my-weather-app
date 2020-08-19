@@ -2,12 +2,12 @@ import React from 'react';
 import './styles/App.css';
 
 //testing
-import AllCards from  './components/WeatherCardCase'
+import Test from  './components/WeatherPersonalCards'
 
 function App() {
   return (
     <div className="App">
-      <AllCards />
+      <Test />
     </div>
   );
 }

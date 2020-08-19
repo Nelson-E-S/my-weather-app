@@ -2,7 +2,7 @@ import {combineReducers} from 'redux';
 import cardReducer from './cardReducers';
 
 const rootReducer = combineReducers({
-    personalCardsState: cardReducer
+    PCState: cardReducer
 })
 
 export default rootReducer
