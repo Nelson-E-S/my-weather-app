@@ -11,6 +11,7 @@ const mapStateToProps = state =>({
 //requires parentData[zoneId,name,state]
 //requires index
 class WeatherCardb extends Component{
+    _isMounted = false;
     constructor(props){
         super(props);
         this.state={
@@ -61,6 +62,8 @@ class WeatherCardb extends Component{
         }
     }
     componentDidMount(){
+        this._isMounted = true;
+        
         const {parentData} = this.props;
         const query = `https://api.weather.gov/zones/public/${parentData[0]}/forecast` 
         this.setState({
@@ -71,12 +74,14 @@ class WeatherCardb extends Component{
                 .get(query)
                 .then(res=>{
                     const periods = res.data.properties.periods
-                    this.setState({
-                        data: periods,
-                        loading: false,
-                        name: parentData[1],
-                        state: parentData[2]
-                    })
+                    if (this._isMounted) {
+                        this.setState({
+                            data: periods,
+                            loading: false,
+                            name: parentData[1],
+                            state: parentData[2]
+                        })
+                    }
                 })
         }catch(err){
             this.setState({
@@ -84,6 +89,9 @@ class WeatherCardb extends Component{
                 errors: err.message
             })
         }
+    }
+    componentWillUnmount(){
+        this._isMounted = false;
     }
     render(){
         const {data,loading,errors,currentIndex,name,state} = this.state;
