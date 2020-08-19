@@ -9,12 +9,12 @@ import {
 import SelectorPage from './pages/SelectorPage'
 import UserPage from './pages/UserPage'
 import HomePage from './pages/HomePage'
-import { List } from 'semantic-ui-react'
+import { List,Segment } from 'semantic-ui-react'
 
 
 function App() {
   return (
-    <div className="App">
+    <Segment className="App">
         <Router>
           <List link horizontal divided relaxed size="large">
           <List.Item active><Link to="/">Home</Link></List.Item>
@@ -35,7 +35,7 @@ function App() {
               </Route>
             </Switch>
         </Router>
-    </div>
+    </Segment>
   );
 }
 
