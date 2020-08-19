@@ -1,12 +1,15 @@
 import React from 'react'
 import WeatherPersonalCards from '../components/WeatherPersonalCards';
+import {Segment,Button,Divider} from 'semantic-ui-react'
+import {Link} from 'react-router-dom'
 
 const UserPage = () =>{
     return(
-        <div>
+        <Segment>
             <WeatherPersonalCards />
-            <hr style={{height:'1px',width:'100%',background:'black'}} />
-        </div>
+            <Divider />
+            <Link to="/SelectorPage"><Button>Add Cards</Button></Link>
+        </Segment>
     )
 }
 

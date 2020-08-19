@@ -24,9 +24,6 @@ function App() {
             <li>
               <Link to="/UserPage">User Page</Link>
             </li>
-            <li>
-              <Link to="/SelectorPage">Selector Page</Link>
-            </li>
           </ul>
         </nav>
 
