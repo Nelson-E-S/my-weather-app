@@ -1,3 +1,3 @@
 # Problem Statement
 ## User Story
-I would like to see a weather
+I would like to see a weather synopsis
