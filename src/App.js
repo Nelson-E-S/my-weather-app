@@ -10,10 +10,14 @@ import SelectorPage from './pages/SelectorPage'
 import UserPage from './pages/UserPage'
 import HomePage from './pages/HomePage'
 import { List,Segment } from 'semantic-ui-react'
+import ReactPlayer from 'react-player'
 
 
 function App() {
   return (
+    <Segment id="change">
+      <ReactPlayer id="myVideo" url='https://www.youtube.com/watch?v=Ul_r4_QMAV8' muted={true} loop={true} playing={true} />
+      <div id="overlayVideo"></div>
     <Segment className="App">
         <Router>
           <List link horizontal divided relaxed size="large">
@@ -35,6 +39,7 @@ function App() {
               </Route>
             </Switch>
         </Router>
+    </Segment>
     </Segment>
   );
 }
