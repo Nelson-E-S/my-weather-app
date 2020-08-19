@@ -3,4 +3,4 @@
 I would like to see a weather synopsis of my favorite places
 
 # Problem Solution
-## Technical
+## Technical Story
